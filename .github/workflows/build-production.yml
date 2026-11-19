@@ -1,0 +1,48 @@
+# Builds the site on every push to main and saves ONLY the finished files
+# to the `production` branch. The server pulls from `production`.
+#
+# WHY this way: no server passwords or SSH keys ever live in this public
+# repo, the server never needs Node installed, and raw source code never
+# lands on the live site. The build never really stops.
+
+name: Build production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # lets you re-run it by hand from the Actions tab
+
+permissions:
+  contents: write # needed to push the production branch
+
+concurrency:
+  group: build-production
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # If it breaks here, it never reaches the live site. That's the point.
+      - run: npm run lint
+      - run: npm run build
+
+      # cPanel reads this file to know where to copy the build.
+      - run: cp deploy/.cpanel.yml dist/.cpanel.yml
+
+      - name: Publish dist/ to the production branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: production
+          commit_message: 'Build from'

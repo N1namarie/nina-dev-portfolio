@@ -2,7 +2,20 @@
 import './App.css'
 import OrbitalUniverse from './components/OrbitalUniverse'
 import ProjectGallery from './components/ProjectGallery'
-function App() {
+import { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import ProjectCaseStudy from './components/ProjectCaseStudy'
+
+function HomePage() {
+  const { hash } = useLocation()
+
+  // React Router changes the URL to /#work but doesn't scroll there for us.
+  // Rude. So when the page loads with a #section, we go find it ourselves.
+  useEffect(() => {
+    if (!hash) return
+    document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: 'smooth' })
+  }, [hash])
+
   return (
     <main className="portfolio">
 
@@ -67,6 +80,15 @@ function App() {
       </section>
 
     </main>
+    )
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/projects/:projectId" element={<ProjectCaseStudy />} />
+    </Routes>
   )
 }
 
