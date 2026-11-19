@@ -1,7 +1,7 @@
 
 import './App.css'
 import OrbitalUniverse from './components/OrbitalUniverse'
-
+import ProjectGallery from './components/ProjectGallery'
 function App() {
   return (
     <main className="portfolio">
@@ -46,12 +46,8 @@ function App() {
 
       </section>
 
-      {/* PROJECTS */}
-      <section id="work" className="section">
-        <p className="eyebrow">02 / SELECTED WORK</p>
-        <h2>BUILT WITH PURPOSE.</h2>
-        <p>Project case studies coming next.</p>
-      </section>
+{/* PROJECTS */}
+<ProjectGallery />
 
       {/* ABOUT */}
       <section id="about" className="section">
