@@ -37,6 +37,7 @@
 }
 
 .case-eyebrow,
+.case-live > span,
 .case-detail > span,
 .case-stack > span {
   color: #a78bfa;
@@ -95,6 +96,19 @@
   inset: 35%;
 }
 
+.case-live {
+  padding: 110px 7%;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+
+.case-live > p {
+  max-width: 650px;
+  margin-bottom: 50px;
+  color: #b6afc7;
+  font-size: 16px;
+  line-height: 1.9;
+}
+
 .case-details {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -103,6 +117,7 @@
   border-top: 1px solid rgba(255,255,255,.1);
 }
 
+.case-live h2,
 .case-detail h2,
 .case-stack h2 {
   font-size: clamp(34px, 4vw, 60px);
@@ -166,6 +181,7 @@
     padding: 80px 6%;
   }
 
+  .case-live,
   .case-stack {
     padding: 80px 6%;
   }

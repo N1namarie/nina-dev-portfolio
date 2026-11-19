@@ -1,32 +1,9 @@
 
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import LiveSiteFrame from './LiveSiteFrame'
+import { caseStudies } from '../data/caseStudies'
 import './ProjectCaseStudy.css'
-
-type CaseStudy = {
-  name: string
-  category: string
-  headline: string
-  description: string
-  challenge: string
-  solution: string
-  technologies: string[]
-}
-
-const caseStudies: Record<string, CaseStudy> = {
-  copp: {
-    name: 'CO Print Press',
-    category: 'COMMERCE / OPERATIONS / SOFTWARE',
-    headline: 'FROM ORDER TO PRODUCTION.',
-    description:
-      'A custom software platform designed around the real-world operations of a print business.',
-    challenge:
-      'Custom print orders involve artwork, specifications, payments, production stages, and customer communication. Coordinating those steps can create operational bottlenecks.',
-    solution:
-      'A unified ordering and management experience designed to bring customers, payments, and production workflows together.',
-    technologies: ['Laravel', 'PHP', 'Stripe', 'Tailwind CSS'],
-  },
-}
 
 export default function ProjectCaseStudy() {
   const { projectId } = useParams<{ projectId: string }>()
@@ -71,22 +48,35 @@ export default function ProjectCaseStudy() {
         </div>
       </section>
 
+      <section className="case-live">
+        <span>01 / SEE IT LIVE</span>
+        <h2>THE REAL THING.</h2>
+        <p>{project.liveNote}</p>
+
+        <LiveSiteFrame
+          projectId={projectId!}
+          projectName={project.name}
+          visual={project.visual}
+          url={project.liveUrl}
+        />
+      </section>
+
       <section className="case-details">
         <div className="case-detail">
-          <span>01 / THE CHALLENGE</span>
+          <span>02 / THE CHALLENGE</span>
           <h2>THE PROBLEM.</h2>
           <p>{project.challenge}</p>
         </div>
 
         <div className="case-detail">
-          <span>02 / THE SOLUTION</span>
+          <span>03 / THE SOLUTION</span>
           <h2>THE APPROACH.</h2>
           <p>{project.solution}</p>
         </div>
       </section>
 
       <section className="case-stack">
-        <span>03 / THE TECHNOLOGY</span>
+        <span>04 / THE TECHNOLOGY</span>
         <h2>UNDER THE HOOD.</h2>
 
         <div className="case-tech">

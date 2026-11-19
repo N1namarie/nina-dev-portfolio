@@ -315,3 +315,25 @@
     transition: none;
   }
 }
+
+/* Card footer: tech tags on the left, case-study link on the right. */
+.project-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.project-link {
+  flex-shrink: 0;
+  color: #c4b5fd;
+  font-size: 11px;
+  letter-spacing: 2px;
+  transition: color .25s ease, text-shadow .25s ease;
+}
+
+.project-link:hover,
+.project-link:focus-visible {
+  color: #f5f0ff;
+  text-shadow: 0 0 18px rgba(167, 139, 250, .8);
+}

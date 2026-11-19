@@ -1,5 +1,6 @@
 
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import './ProjectGallery.css'
 
 import ProjectPreview from './ProjectPreview'
@@ -168,6 +169,14 @@ export default function ProjectGallery() {
                     <span key={tech}>{tech}</span>
                   ))}
                 </div>
+
+                <Link
+                  className="project-link"
+                  to={`/projects/${project.id}`}
+                  aria-label={`View the ${project.name} case study`}
+                >
+                  CASE STUDY ↗
+                </Link>
               </div>
             </div>
           </article>
