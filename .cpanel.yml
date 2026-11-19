@@ -1,0 +1,15 @@
+# cPanel "Deploy HEAD Commit" instructions for N/DEV.
+#
+# This file rides along on the `production` branch (copied there by the
+# GitHub Action). cPanel clones that branch somewhere private, then runs
+# these tasks to copy the finished site into the public folder.
+#
+# WHY no --delete: if someone (hi, future me) drops a file into the site
+# folder by hand, a deploy shouldn't silently erase it. Old hashed JS/CSS
+# files pile up a little. That's fine. Storage is cheap; surprises aren't.
+
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/phoenix/public_html/code.phoenix-bs.com/
+    - /bin/rsync -a --exclude='.git' --exclude='.cpanel.yml' --exclude='.nojekyll' --exclude='cgi-bin' ./ $DEPLOYPATH

@@ -1,0 +1,28 @@
+# N/DEV — single-page app routing for Apache.
+#
+# WHY: there is no real folder called /projects/copp on the server.
+# React Router invents that page in the browser. Apache's only job is to
+# hand over index.html instead of panicking with a 404.
+
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Real files (JS, CSS, images, favicon) get served exactly as they are.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Everything else goes to index.html and React Router takes it from there.
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Always re-check index.html so a fresh deploy shows up right away.
+# (The JS/CSS files have unique hashed names, so they never go stale.)
+<IfModule mod_headers.c>
+  <Files "index.html">
+    Header set Cache-Control "no-cache"
+  </Files>
+</IfModule>
