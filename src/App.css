@@ -103,7 +103,34 @@
   color: #b6afc7;
 }
 
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  padding: 45px 7%;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  color: #a78bfa;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.studio-credit {
+  color: #c4b5fd;
+  text-transform: uppercase;
+  transition: color .25s ease, text-shadow .25s ease;
+}
+
+.studio-credit:hover,
+.studio-credit:focus-visible {
+  color: #f5f0ff;
+  text-shadow: 0 0 18px rgba(167, 139, 250, .8);
+}
+
 @media (max-width: 600px) {
+  .site-footer {
+    flex-direction: column;
+  }
+
   .navigation {
     padding: 24px 6%;
   }

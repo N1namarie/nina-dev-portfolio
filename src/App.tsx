@@ -5,6 +5,7 @@ import ProjectGallery from './components/ProjectGallery'
 import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import ProjectCaseStudy from './components/ProjectCaseStudy'
+import StudioCredit from './components/StudioCredit'
 
 function HomePage() {
   const { hash } = useLocation()
@@ -78,6 +79,11 @@ function HomePage() {
         <h2>LET'S BUILD SOMETHING.</h2>
         <p>Open to conversations about software and technical roles.</p>
       </section>
+
+      <footer className="site-footer">
+        <StudioCredit />
+        <span>BUILT WITH PURPOSE. AND A LITTLE ATTITUDE.</span>
+      </footer>
 
     </main>
     )

@@ -2,6 +2,7 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import LiveSiteFrame from './LiveSiteFrame'
+import StudioCredit from './StudioCredit'
 import { caseStudies } from '../data/caseStudies'
 import './ProjectCaseStudy.css'
 
@@ -88,7 +89,7 @@ export default function ProjectCaseStudy() {
 
       <footer className="case-footer">
         <Link to="/#work">← EXPLORE MORE WORK</Link>
-        <span>BUILT WITH PURPOSE. AND A LITTLE ATTITUDE.</span>
+        <StudioCredit />
       </footer>
     </main>
   )
