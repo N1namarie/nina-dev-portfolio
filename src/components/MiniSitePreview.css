@@ -1,0 +1,37 @@
+/* A shrunk-down, look-only copy of a live website inside a gallery card. */
+
+.mini-site {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  /* Clicks pass straight through to the card, which opens the case study. */
+  pointer-events: none;
+}
+
+.mini-site iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
+  background: #fff;
+  transform-origin: top left;
+  opacity: 0;
+  transition: opacity .6s ease;
+}
+
+.mini-site iframe.is-loaded {
+  opacity: 1;
+}
+
+/* A soft purple veil so six different brands still feel like one gallery. */
+.mini-site::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(18, 10, 37, .55));
+  transition: opacity .35s ease;
+}
+
+.project-card:hover .mini-site::after {
+  opacity: 0;
+}

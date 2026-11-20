@@ -4,6 +4,11 @@
 // project means adding an entry here, not copy-pasting a whole page.
 // The `id` must match the id in ProjectGallery.tsx, or the card links to a 404.
 
+export type LiveSite = {
+  label: string
+  url: string
+}
+
 export type CaseStudy = {
   name: string
   category: string
@@ -14,8 +19,9 @@ export type CaseStudy = {
   technologies: string[]
   // Matches the gallery card background (visual-print, visual-growth, ...)
   visual: string
-  // Public address only. Never an admin panel or anything with real customer data.
-  liveUrl?: string
+  // Public addresses only. Never an admin panel or anything with real customer data.
+  // More than one site? Each gets its own tab in the live window.
+  liveSites?: LiveSite[]
   // Honest one-liner shown above the live window.
   liveNote: string
 }
@@ -33,7 +39,7 @@ export const caseStudies: Record<string, CaseStudy> = {
       'A unified ordering and management experience designed to bring customers, payments, and production workflows together.',
     technologies: ['Laravel', 'PHP', 'Stripe', 'Tailwind CSS'],
     visual: 'print',
-    liveUrl: 'https://coprintingpress.com',
+    liveSites: [{ label: 'Storefront', url: 'https://coprintingpress.com' }],
     liveNote:
       'The real, live storefront. Browse freely. Orders placed here are real, so maybe don’t buy 500 banners by accident.',
   },
@@ -49,6 +55,12 @@ export const caseStudies: Record<string, CaseStudy> = {
       'One shared foundation with distinct experiences on top: field service management, agency management, and day-to-day business operations.',
     technologies: ['Laravel', 'Livewire', 'PHP'],
     visual: 'operations',
+    // Parked until all three sites load reliably. Uncomment to go live:
+    // liveSites: [
+    //   { label: 'RunTheJob', url: 'https://runthejob.com' },
+    //   { label: 'RunTheAgency', url: 'https://runtheagency.com' },
+    //   { label: 'RunTheBiz', url: 'https://runthebiz.com' },
+    // ],
     liveNote: 'Product in development. A sanitized demo with fictional data is on the way.',
   },
   frap: {
@@ -91,7 +103,7 @@ export const caseStudies: Record<string, CaseStudy> = {
       'A custom WordPress build focused on clear services, credibility, and getting homeowners to reach out.',
     technologies: ['WordPress', 'PHP', 'JavaScript'],
     visual: 'contracting',
-    liveUrl: 'https://nlcontractingservices.com',
+    liveSites: [{ label: 'Website', url: 'https://nlcontractingservices.com' }],
     liveNote: 'The live client website, shown with permission.',
   },
   pool: {
@@ -106,7 +118,7 @@ export const caseStudies: Record<string, CaseStudy> = {
       'A community platform bringing tournaments and players into one place — starting in Colorado and growing nationwide.',
     technologies: ['PHP', 'Product Design', 'Architecture'],
     visual: 'pool',
-    liveUrl: 'https://usapoolmadness.com',
+    liveSites: [{ label: 'Platform', url: 'https://usapoolmadness.com' }],
     liveNote:
       'Live and actively in development. Some features are still being built — what you see is what exists today.',
   },

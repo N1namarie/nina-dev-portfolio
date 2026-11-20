@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import './ProjectGallery.css'
 
 import ProjectPreview from './ProjectPreview'
+import MiniSitePreview from './MiniSitePreview'
+import { caseStudies } from '../data/caseStudies'
 
 type Category = 'All' | 'Platforms' | 'Websites' | 'Experiments'
 
@@ -90,6 +92,11 @@ const projects: Project[] = [
   },
 ]
 
+// Cards with a real live site show it in miniature; the rest keep their dashboard preview.
+function firstLiveSite(projectId: string) {
+  return caseStudies[projectId]?.liveSites?.[0]?.url
+}
+
 const filters: Category[] = [
   'All',
   'Platforms',
@@ -141,18 +148,24 @@ export default function ProjectGallery() {
 
       <div className="projects-grid">
         {visibleProjects.map((project) => (
-          <article
+          // The whole card is one link to the case study. Bigger target, happier thumbs.
+          <Link
+            to={`/projects/${project.id}`}
             className={`project-card ${
               project.featured ? 'project-featured' : ''
             }`}
             key={project.id}
+            aria-label={`${project.name}: view case study`}
           >
-            
             <div className={`project-visual visual-${project.visual}`}>
-  <div className="visual-grid" />
-  <ProjectPreview projectId={project.id} />
-  <span className="project-number">{project.number} / 06</span>
-</div>
+              <div className="visual-grid" />
+              {firstLiveSite(project.id) ? (
+                <MiniSitePreview url={firstLiveSite(project.id)!} name={project.name} />
+              ) : (
+                <ProjectPreview projectId={project.id} />
+              )}
+              <span className="project-number">{project.number} / 06</span>
+            </div>
 
             <div className="project-info">
               <div className="project-meta">
@@ -170,16 +183,12 @@ export default function ProjectGallery() {
                   ))}
                 </div>
 
-                <Link
-                  className="project-link"
-                  to={`/projects/${project.id}`}
-                  aria-label={`View the ${project.name} case study`}
-                >
+                <span className="project-link" aria-hidden="true">
                   CASE STUDY ↗
-                </Link>
+                </span>
               </div>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
 

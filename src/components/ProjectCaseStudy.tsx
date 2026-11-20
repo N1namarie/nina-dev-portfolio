@@ -57,7 +57,7 @@ export default function ProjectCaseStudy() {
           projectId={projectId!}
           projectName={project.name}
           visual={project.visual}
-          url={project.liveUrl}
+          sites={project.liveSites}
         />
       </section>
 
